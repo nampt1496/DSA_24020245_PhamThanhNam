@@ -27,21 +27,3 @@ bool llFront(Node* head, int& x) {                          // O(1)
     return true;
 }
 
-int main() {
-    int v;
-
-    cout << "Queue (List mang): ";
-    n = 0;
-    for (int x : {1, 2, 3}) arrEnqueue(x);
-    while (arrFront(v)) { cout << v << " "; arrDequeue(); }
-    cout << endl;
-
-    cout << "Queue (Linked list): ";
-    Node* q = nullptr;
-    for (int x : {1, 2, 3}) llEnqueue(q, x);
-    while (llFront(q, v)) { cout << v << " "; llDequeue(q); }
-    cout << endl;
-
-    clearList(q);
-    return 0;
-}
