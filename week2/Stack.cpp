@@ -26,22 +26,3 @@ bool llTop(Node* head, int& x) {                            // O(1)
     x = head->data;
     return true;
 }
-
-int main() {
-    int v;
-
-    cout << "Stack (List mang): ";
-    n = 0;
-    for (int x : {1, 2, 3}) arrPush(x);
-    while (arrTop(v)) { cout << v << " "; arrPop(); }
-    cout << endl;
-
-    cout << "Stack (Linked list): ";
-    Node* s = nullptr;
-    for (int x : {1, 2, 3}) llPush(s, x);
-    while (llTop(s, v)) { cout << v << " "; llPop(s); }
-    cout << endl;
-
-    clearList(s);
-    return 0;
-}
