@@ -1,5 +1,5 @@
-#include "LinkedList.cpp"
-#include "List.cpp"
+#include ".../week1/LinkedList.cpp"
+#include ".../week1/List.cpp"
 
 // cach 1: dung list
 void arrPush(int x) { insertLast(x); }                      // O(1)
