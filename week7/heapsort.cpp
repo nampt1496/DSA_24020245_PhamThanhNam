@@ -1,29 +1,70 @@
 #include <iostream>
 using namespace std;
 
-void heapify(int a[], int n, int i) {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+#define MAX 100
 
-    if (left < n && a[left] > a[largest])
-        largest = left;
-    if (right < n && a[right] > a[largest])
-        largest = right;
-    if (largest != i) {
-        swap(a[i], a[largest]);
-        heapify(a, n, largest);
+void swap(int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+
+void swim(int a[], int k) {
+    while (k > 1 && a[k / 2] < a[k]) {
+        swap(a[k], a[k / 2]);
+        k = k / 2;
     }
 }
 
-void heapSort(int a[], int n) {
-    for (int i = n / 2 - 1; i >= 0; i--) {
-        heapify(a, n, i);
-    }
+void sink(int a[], int n, int k) {
+    while (2 * k <= n) {
+        int j = 2 * k;
 
-    // Lấy phần tử lớn nhất đưa về cuối mảng
-    for (int i = n - 1; i > 0; i--) {
-        swap(a[0], a[i]);
-        heapify(a, i, 0);
+        if (j < n && a[j] < a[j + 1])
+            j++;
+
+        if (a[k] >= a[j])
+            break;
+
+        swap(a[k], a[j]);
+        k = j;
     }
+}
+
+void buildHeap(int a[], int n) {
+    for (int i = 2; i <= n; i++)
+        swim(a, i);
+}
+
+void heapSort(int a[], int n) {
+    buildHeap(a, n);
+
+    int size = n;
+
+    while (size > 1) {
+        swap(a[1], a[size]);
+        size--;
+
+        sink(a, size, 1);
+    }
+}
+
+void display(int a[], int n) {
+    for (int i = 1; i <= n; i++)
+        cout << a[i] << " ";
+    cout << endl;
+}
+
+void displayTree(int a[], int n, int k, int level) {
+    if (k > n)
+        return;
+
+    displayTree(a, n, 2 * k + 1, level + 1);
+
+    for (int i = 0; i < level; i++)
+        cout << "    ";
+
+    cout << a[k] << endl;
+
+    displayTree(a, n, 2 * k, level + 1);
 }
